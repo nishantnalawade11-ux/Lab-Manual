@@ -1,72 +1,62 @@
-include <iostream>
-using namespace std;
-class Employee {
- public:
- int id;//data member (also instance variable)
- string name;//data member(also instance variable)
- float salary;
- Employee(int i, string n, float s)
- {
- id = i;
- name = n;
- salary = s;
- }
- void display()
- {
- cout<<id<<" "<<name<<" "<<salary<<endl;
- }
-};
-int main(void) {
- Employee e1 =Employee(101, "Sonoo", 890000); //creating an object of Employee
- Employee e2=Employee(102, "Nakul", 59000);
- e1.display();
- e2.display();
- return 0;
-}
-Output:
-101 Sonoo 890000
-102 Nakul 59000
-C++ Copy Constructor
-A Copy constructor is an overloaded constructor used to declare and initialize an object from
-another object.
-Copy Constructor is of two types:
-Default Copy constructor: The compiler defines the default copy constructor. If the user defines
-no copy constructor, compiler supplies its constructor.
-User Defined constructor: The programmer defines the user-defined constructor.
-C++ Copy Constructor
-Syntax Of User-defined Copy Constructor:
-Class_name(const class_name &old_object);
-Consider the following situation:
-class A
+#include <iostream> // Header file for input and output operations
+using namespace std; // Allows use of standard library names without std::
+// Class definition
+class Patient
 {
- A(A &x) // copy constructor.
- {
- // copyconstructor.
- }
-}
-In the above case, copy constructor can be called in the following ways:
-C++ Copy Constructor
-Let's see a simple example of the copy constructor.
-// program of the copy constructor.
-#include <iostream>
-using namespace std;
-class A
+private: // Private access specifier (data security)
+int patientId; // Stores patient ID
+string patientName;// Stores patient name
+float billAmount; // Stores billing amount
+string appointmentDate; // Stores appointment date
+public: // Public access specifier
+// Default Constructor
+Patient()
 {
- public:
- int x;
- A(int a) // parameterized constructor.
- {
- x=a;
- }
- A(A &i) // copy constructor
- {
- x = i.x;
- }
+patientId = 0; // Initialize patient ID
+patientName = "Not Assigned"; // Initialize patient name
+billAmount = 0.0; // Initialize bill amount
+appointmentDate = "Not Fixed"; // Initialize appointment date
+}
+// Parameterized Constructor
+Patient(int id, string name, float bill, string date)
+{
+patientId = id; // Assign value to patient ID
+patientName = name; // Assign value to patient name
+billAmount = bill; // Assign value to bill amount
+appointmentDate = date;// Assign value to appointment date
+}
+// Copy Constructor
+Patient(Patient &p)
+{
+patientId = p.patientId; // Copy patient ID
+patientName = p.patientName; // Copy patient name
+billAmount = p.billAmount; // Copy bill amount
+appointmentDate = p.appointmentDate;// Copy appointment date
+}
+// Member function to display patient details
+void display()
+{
+cout << "\nPatient ID : " << patientId; // Display patient ID
+cout << "\nPatient Name : " << patientName; // Display patient name
+cout << "\nBilling Amount : Rs. " << billAmount; // Display billing amount
+cout << "\nAppointment Date : " << appointmentDate; // Display appointment date
+cout << endl; // New line
+}
 };
+// Main function
 int main()
 {
- A a1(20); // Calling the parameterized constructor.
-A a2(a1); // Calling the copy constructor.
-cout<<a2.x;
- return 0;
- }
+// Create object using default constructor
+Patient p1;
+cout << "\n--- Default Constructor ---";
+p1.display(); // Call display function
+// Create object using parameterized constructor
+Patient p2(101, "Rahul Patil", 3500.50, "15-02-2026");
+cout << "\n--- Parameterized Constructor ---";
+p2.display(); // Call display function
+// Create object using copy constructor
+Patient p3 = p2;
+cout << "\n--- Copy Constructor ---";
+p3.display(); // Call display function
+return 0; // End of program
+}
